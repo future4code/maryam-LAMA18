@@ -1,7 +1,7 @@
 import { compareSync, genSaltSync, hashSync } from "bcryptjs"
 
 export class HashManager {
-    createHash = (plainText: string) => {
+    createHash = async (plainText: string): Promise<string> => {
         const salt = genSaltSync(12)
 
         const cypherText = hashSync(plainText, salt)
@@ -9,10 +9,10 @@ export class HashManager {
         return cypherText
     }
 
-    compareHash = (
+    compareHash = async (
         plainText: string,
         cypherText: string
-    ) => {
+    ): Promise<boolean> => {
         return compareSync(plainText, cypherText)
     }
 }
