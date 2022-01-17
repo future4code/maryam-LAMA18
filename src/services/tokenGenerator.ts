@@ -15,25 +15,25 @@ export class Authenticator {
         return sign(
             payload,
             process.env.JWT_KEY as string,
-            {
-                expiresIn: "12"
-            }
+            // {
+            //     expiresIn: "12"
+            // }
         )
     }
 
-    getTokenData = (token: string): authenticationData | null => {
+    getTokenData = (token: string): authenticationData => {
         try {
             const tokenData = verify(
                 token,
                 process.env.JWT_KEY!
             ) as JwtPayload
-
+                
             return {
                 id: tokenData.id,
                 role: tokenData.role
             }
-        } catch (error) {
-            return null
+        } finally {
+            
         }
     }
 }
